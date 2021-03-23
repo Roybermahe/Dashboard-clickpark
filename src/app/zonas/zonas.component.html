@@ -1,0 +1,28 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Zonas del servicio de estacionamiento regulado (S.E.R)</h5>
+          <p class="category w-75">
+            <span>
+               <i class="now-ui-icons loader_refresh spin"></i>
+            </span>
+            Esta área se encuentra en desarrollo y es funcional.
+          </p>
+        <div class="card-body">
+          <app-registro-tipos-zonas (listTipos)="onListaTiposZona($event)"></app-registro-tipos-zonas>
+          <hr>
+          <app-registro-zonas [listSelect]="listaTiposZona" (listZonas)="onListaZonas($event)"></app-registro-zonas>
+          <hr>
+          <app-registro-hr-funcionamiento [listaZonas]="listaZonas"></app-registro-hr-funcionamiento>
+          <hr>
+          <app-registro-horarios [listaZonas]="listaZonas"></app-registro-horarios>
+        </div>
+      </div>
+     </div>
+    </div>
+  </div>
+</div>

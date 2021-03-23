@@ -1,0 +1,49 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Vehiculos Registrados en la APP</h5>
+          <p class="category">Lista de todos los vehiculos registrados hasta el momento en la app de CLICK-PARK</p>
+          <button class="btn form-control" (click)="onGetInfo()">
+            <i class="now-ui-icons loader_refresh spin"></i> Presione para actualizar
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-info">
+              <th>#</th>
+              <th>Matricula</th>
+              <th>Marca</th>
+              <th>Tipo</th>
+              </thead>
+              <tbody>
+              <tr *ngFor="let user of listVehiculos">
+                <th scope="row">{{ user.index }}</th>
+                <td>
+                  {{ user.matricula }}
+                </td>
+                <td>{{ user.marca }}</td>
+                <td>{{ 'Automovil' }}</td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="d-flex justify-content-between p-2">
+              <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="onGetInfo()">
+              </ngb-pagination>
+
+              <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="onGetInfo()">
+                <option [ngValue]="2">2 vehiculos por pagina</option>
+                <option [ngValue]="4">4 vehiculos por pagina</option>
+                <option [ngValue]="6">6 vehiculos por pagina</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

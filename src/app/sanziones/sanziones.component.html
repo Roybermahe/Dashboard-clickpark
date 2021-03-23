@@ -1,0 +1,53 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Sanziones Registradas por los vigilantes</h5>
+          <p class="category">Lista de todas las sanziones registrados hasta el momento en la app de CLICK-PARK</p>
+          <button class="btn form-control" (click)="onGetInfo()">
+            <i class="now-ui-icons loader_refresh spin"></i> Presione para actualizar
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-info">
+              <th>#</th>
+              <th>Lugar</th>
+              <th>Hecho</th>
+              <th>Matricula</th>
+              <th>Fecha</th>
+              <th>Valor</th>
+              </thead>
+              <tbody>
+              <tr *ngFor="let sanz of listaSanziones;let i = index">
+                <th scope="row">{{ (i +1 ) }}</th>
+                <td>
+                  {{ 'Vía: '+ sanz.via +' Nro. '+ sanz.lugar }}
+                </td>
+                <td>{{ sanz.hecho }}</td>
+                <td>{{ sanz.vehiculo.matricula }}</td>
+                <td>{{ sanz.fechaRegistro | date: 'M/d/yy, h:mm a' }}</td>
+                <td>5 &#8364;</td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="d-flex justify-content-between p-2">
+              <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="onGetInfo()">
+              </ngb-pagination>
+
+              <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="onGetInfo()">
+                <option [ngValue]="2">2 sanziones por pagina</option>
+                <option [ngValue]="4">4 sanziones por pagina</option>
+                <option [ngValue]="6">6 sanziones por pagina</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

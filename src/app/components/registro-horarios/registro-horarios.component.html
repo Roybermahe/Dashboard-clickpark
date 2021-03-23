@@ -1,0 +1,64 @@
+<h6>Registrar Tarifas de acuerdo al tiempo de parking</h6>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="listaZonas">Seleccione la zona a la que desea argregar la tarifa</label>
+      <select #selectZonas id="listaZonas" class="form-control" (change)="onChangeZona()">
+        <option disabled selected>Selecciona una opción</option>
+        <ng-container *ngFor="let item of listaZonas">
+            <option value="{{item.id}}">{{item.nombreZona}}</option>
+        </ng-container>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <button class="btn btn-info" (click)="onAddHorario()" [disabled]="btnDisable" >Agregar tarifa</button>
+  </div>
+</div>
+<ng-container *ngFor="let item of listaHorarios;let i = index">
+  <form #form="ngForm" (ngSubmit)="form.form.valid && onSubmit(i)">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="">Duración en la zona</label>
+          <input type="number" min="1" class="form-control" name="duracion" [(ngModel)]="item.tiempo"></div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="">Formato</label>
+          <select class="form-control" #formatTime [value]="item.formato" (change)="onChangeFormat(i,formatTime.value)" required>
+            <option disabled selected>Elija el formato</option>
+            <ng-container *ngFor="let item of formats">
+              <option value="{{item}}">{{item}}</option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="">Tarifa</label>
+          <input type="number" min="0" class="form-control" name="tarifa" [(ngModel)]="item.tarifa">
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="">Descuento</label>
+          <input type="number" min="0" class="form-control" name="descuento" [(ngModel)]="item.descuento">
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div *ngIf="item.id" class="form-group">
+          <button class="btn-primary btn btn-round mt-1">
+            <span class="now-ui-icons ui-1_simple-remove"></span>
+          </button>
+        </div>
+        <div *ngIf="!item.id" class="form-group">
+          <button type="submit" class="btn-success btn btn-round mt-1">
+            <span class="now-ui-icons ui-1_check"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</ng-container>
+

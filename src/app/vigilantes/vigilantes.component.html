@@ -1,0 +1,100 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Lista de vigilantes</h5>
+        </div>
+        <div class="card-body">
+          <div *ngIf="listVigilantes.length > 0; else message" class="table-responsive">
+            <table class="table">
+              <thead class="text-info">
+              <th>#</th>
+              <th>Numero de placa</th>
+              <th>Nombre</th>
+              <th>Correo</th>
+              <th style="width: 15%">Eliminar</th>
+              </thead>
+              <tbody>
+              <tr *ngFor="let vgl of listVigilantes">
+                <th scope="row">{{ vgl.index }}</th>
+                <td>
+                  {{ vgl.numeroplaca }}
+                </td>
+                <td>
+                  {{ vgl.nombre }}
+                </td>
+                <td>
+                  {{ vgl.correo }}
+                </td>
+                <td>
+                  <button class="btn btn-sm btn-danger" (click)="onDelete(vgl.id)">
+                    <span class="now-ui-icons ui-1_simple-remove"></span>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+            <div class="d-flex justify-content-between p-2">
+              <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="onGetInfo()">
+              </ngb-pagination>
+
+              <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="onGetInfo()">
+                <option [ngValue]="2">2 vigilantes por pagina</option>
+                <option [ngValue]="4">4 vigilantes por pagina</option>
+                <option [ngValue]="6">6 vigilantes por pagina</option>
+              </select>
+            </div>
+        </div>
+          <ng-template #message>
+            <p class="category">
+              No hay vigilantes agregados al sistema
+            </p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Registrar vigilante</h5>
+        </div>
+        <div class="card-body">
+            <form #form="ngForm" (ngSubmit)="form.form.valid && onSubmit()">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Número de placa</label>
+                    <input type="text" class="form-control" placeholder="Digite el numero de placa" name="placa" [(ngModel)]="vglte.placa" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Nombre del vigilante</label>
+                    <input type="text" class="form-control" placeholder="Digite el nombre del vigilante" name="nombre" [(ngModel)]="vglte.nombre" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Correo del vigilante</label>
+                    <input type="email" class="form-control" placeholder="Digite el correo" name="correo" [(ngModel)]="vglte.correo" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <button type="submit" class="btn btn-info w-100">Registrar</button>
+                </div>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

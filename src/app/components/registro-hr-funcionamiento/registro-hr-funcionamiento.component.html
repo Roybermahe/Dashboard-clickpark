@@ -1,0 +1,50 @@
+<h6>Registrar Horario de funcionamiento</h6>
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="listaZonas">Seleccione la zona a la que desea argregar horario</label>
+      <select #selectZonas id="listaZonas" class="form-control" (change)="onChangeZona()">
+        <option disabled selected>Selecciona una opción</option>
+        <ng-container *ngFor="let item of listaZonas">
+          <option value="{{item.id}}">{{item.nombreZona}}</option>
+        </ng-container>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <button class="btn btn-info" (click)="onAddHorario()" [disabled]="btnDisable" >Agregar horario</button>
+  </div>
+</div>
+<div>
+  <ng-container *ngFor="let item of horariosFuncionamiento; let i = index">
+    <form (ngSubmit)="onSubmit(i) && form.form.valid" #form="ngForm">
+      <ng-container *ngFor="let days of item.horarioCheckList; let j = index">
+        <label class="btn bg-white text-dark" ngbButtonLabel>
+          <input type="checkbox" ngbButton name="checkday-{{i+'-'+j}}" [(ngModel)]="days.check"> {{days.dia}}
+        </label>
+      </ng-container>
+      <div class="row">
+        <div class="col-md-3">
+          <label>Hora de inicio</label>
+          <ngb-timepicker name="horaInicio" [(ngModel)]="item.inicioTime" [meridian]="true"></ngb-timepicker>
+        </div>
+        <div class="col-md-3">
+          <label>Hora de finalización</label>
+          <ngb-timepicker name="horaFinal" [(ngModel)]="item.finalTime" [meridian]="true"></ngb-timepicker>
+        </div>
+        <div class="col-md-3">
+          <label class="btn bg-success text-white" ngbButtonLabel>
+            <input type="checkbox" ngbButton name="fredays{{i}}" [(ngModel)]="item.freedays"> FREE
+          </label>
+          <p>Al seleccionar esta función se ignoran las horas de funcionamiento de la zona, con el fin de evitar el pago del parking en los dias de la semana seleccionados.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <button class="btn btn-info">Guardar horario de funcionamiento</button>
+        </div>
+      </div>
+    </form>
+  </ng-container>
+</div>
+

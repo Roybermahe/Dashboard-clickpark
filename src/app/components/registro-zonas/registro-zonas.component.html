@@ -1,0 +1,50 @@
+<h6>Registrar Zonas</h6>
+<form (ngSubmit)="form.form.valid && onSubmit()" #form="ngForm" >
+      <div class="row">
+        <div class="col-md-6 pr-1">
+          <div class="form-group">
+            <label for="tiposzona">Seleccione el tipo de zona</label>
+            <select #selectTiposZonas class="form-control" id="tiposzona" required>
+              <ng-container *ngFor="let item of listSelect">
+                <option value="{{item.id}}">{{item.nombre}}</option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 pr-1">
+          <div class="form-group">
+            <label for="">Nombre de zona</label>
+            <input type="text" placeholder="Ejm: zonas SER normales, Zonas de bajas emisiones, etc" class="form-control" name="nombre" [(ngModel)]="zona.nombre" required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 pr-1">
+          <div class="form-group">
+            <label for="">Timpo limite de permanencia</label>
+            <input type="number" min="0" placeholder="25 min, 25 hrs, 1 dd" class="form-control" name="tiempolim" [(ngModel)]="zona.tiempolim" required>
+          </div>
+        </div>
+        <div class="col-md-2 pr-1">
+          <div class="form-group">
+            <label for="formatos">Formato de tiempo</label>
+            <select #selectFormat class="form-control" id="formatos" required>
+              <ng-container *ngFor="let item of formats">
+                <option value="{{item}}">{{item}}</option>
+              </ng-container>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 pr-1">
+          <div class="form-group">
+            <button class="btn btn-info w-100">Guardar Zona</button>
+          </div>
+        </div>
+      </div>
+</form>
+
+

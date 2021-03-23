@@ -1,0 +1,16 @@
+<h6>Registrar tipos de zona</h6>
+<form (ngSubmit)="form.form.valid && onSubmit()" #form="ngForm" >
+  <div class="row">
+    <div class="col-md-6 pr-1">
+      <div class="form-group">
+        <label>Tipo de zona</label>
+        <input type="text" class="form-control" name="nombre" [(ngModel)]="tipoZona.nombre" placeholder="Zonas verdes, Azules o Mixtas" required>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <button class="btn-info btn">Guardar tipo de zona</button>
+    </div>
+  </div>
+</form>
